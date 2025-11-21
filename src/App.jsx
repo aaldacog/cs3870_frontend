@@ -1,13 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./navigation/Layout.jsx";
 import Contacts from "./Contacts.jsx";
-import AddContact from "./AddContact.jsx";
-import DeleteContact from "./DeleteContact.jsx";
 
 // Temporary placeholders for routes you’ll implement later
 const Home = () => <p>Welcome.</p>;
-// const AddContact = () => <p>(POST) Add contact screen (coming soon)</p>;
-// const DeleteContact = () => <p>(DELETE) Delete contact screen (coming soon)</p>;
+const AddContact = () => <p>(POST) Add contact screen (coming soon)</p>;
+const DeleteContact = () => <p>(DELETE) Delete contact screen (coming soon)</p>;
 const UpdateContact = () => <p>(PUT) Update contact screen (coming soon)</p>;
 
 function App() {
