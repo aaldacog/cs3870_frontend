@@ -1,24 +1,20 @@
 // AddContact.jsx
 import React, { useState } from "react";
-
-export default function AddContact() {
+ export default function AddContact() {
   const [contactName, setContactName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [responseMsg, setResponseMsg] = useState("");
-
-  const handleAddContact = async (e) => {
+   const handleAddContact = async (e) => {
     e.preventDefault();
     setResponseMsg("");
-
-    if (!contactName.trim()) {
+     if (!contactName.trim()) {
       setResponseMsg("Contact name is required.");
       return;
     }
-
-    try {
-        const res = await fetch("https://cs3870-backend-1.onrender.com/contacts", {
+     try {
+        const res = await fetch("http://localhost:8081/contacts", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -30,11 +26,9 @@ export default function AddContact() {
             image_url: imageUrl,
         }),
         });
-
-      const data = await res.json().catch(() => null);
-
-      if (res.status === 201) {
-        setResponseMsg(data?.message || "Contact added successfully!");
+       const data = await res.json().catch(() => null);
+       if (res.status === 201) {
+        setResponseMsg("Contact added successfully!");
         // Clear fields
         setContactName("");
         setPhoneNumber("");
@@ -48,42 +42,37 @@ export default function AddContact() {
       setResponseMsg("Network error: Could not connect to the server.");
     }
   };
-
-  return (
-    <div style={{ padding: "20px" }}>
+   return (
+        <div style={{ padding: "20px" }}>
       <h2>Add New Contact</h2>
-
-      <form onSubmit={handleAddContact}>
+       <form onSubmit={handleAddContact}>
         <input
           type="text" placeholder="Full Name" value={contactName} 
           onChange={(e) => setContactName(e.target.value)}
         />
         <br /><br />
-
-        <input
+         <input
           type="text" placeholder="Phone Number" value={phoneNumber} 
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <br /><br />
-
-        <input
+         <input
           type="text" placeholder="Message" value={message} 
           onChange={(e) => setMessage(e.target.value)}
         />
         <br /><br />
-
-        <input
+         <input
           type="text" placeholder="Image URL" value={imageUrl} 
           onChange={(e) => setImageUrl(e.target.value)}
         />
         <br /><br />
-
-        <button type="submit">Add Contact</button>
+         <button type="submit">Add Contact</button>
       </form>
-
-      {responseMsg && (
+       {responseMsg && (
         <p style={{ marginTop: "15px", color: "blue" }}>{responseMsg}</p>
       )}
     </div>
+
+
   );
 }
